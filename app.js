@@ -10,4 +10,4 @@ app.get('/chat',(req,res,next) => {
     res.sendFile(path.join(__dirname, 'public', 'rtc.html'));
 })
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000);
