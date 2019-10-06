@@ -4,14 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start":"nodemon start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^1.19.3"
-  },
   "dependencies": {
     "express": "^4.17.1"
   }
