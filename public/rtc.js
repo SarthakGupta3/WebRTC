@@ -1,7 +1,8 @@
 const socket = io();
 let peer;
 let mediaConstraints = {
-    video:true
+    video:true,
+    audio:true
 }
 let start = document.querySelector('.start');
 start.addEventListener('click', async function(){
@@ -39,7 +40,7 @@ async function handleNegotiationNeeded(){
 socket.on('video-offer', async function(data){
    if(socket.id !== data.id){
     peer = new RTCPeerConnection({'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }]});
-    peer.onnegotiationneeded = handleNegotiationNeeded;
+    // peer.onnegotiationneeded = handleNegotiationNeeded;
     peer.onicecandidate = handleICE;
     peer.ontrack = handleTrack;
     let sessionObject = new RTCSessionDescription(data.sdp);
@@ -47,8 +48,8 @@ socket.on('video-offer', async function(data){
     localStream2 = await navigator.mediaDevices.getUserMedia(mediaConstraints);
     document.querySelector('.localStream').srcObject = localStream2;
     localStream2.getTracks().forEach(
-     transceiver = track => peer.addTransceiver(track, {streams: [localStream2]})
-   );
+        transceiver = track => peer.addTransceiver(track, {streams: [localStream2]})
+      );
    const answer = await peer.createAnswer();
    await peer.setLocalDescription(answer);
    socket.emit('video-answer', {
