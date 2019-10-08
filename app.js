@@ -7,7 +7,7 @@ app.get('/', (req,res,next) => {
     res.sendFile(path.join(__dirname, 'public', 'rtc.html'));
 });
 
-const server = app.listen(3000);
+const server = app.listen(process.env.PORT||3000);
 
 const io = socket(server);
 
